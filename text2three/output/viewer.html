@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body, html { margin: 0; height: 100%; background: #222; }
+    model-viewer { width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <model-viewer
+    id="modelViewer"
+    src=""
+    alt="3D model"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1"
+    exposure="1">
+  </model-viewer>
+
+  <script>
+    // Get GLB file from URL query string
+    const params = new URLSearchParams(window.location.search);
+    const modelUrl = params.get('model');
+
+    if (modelUrl) {
+      document.getElementById('modelViewer').src = modelUrl;
+    } else {
+      document.body.innerHTML = '<p style="color:white; padding:2rem;">No model specified. Use ?model=your_model.glb in the URL.</p>';
+    }
+  </script>
+</body>
+</html>
