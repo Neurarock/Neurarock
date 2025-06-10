@@ -3,11 +3,12 @@ from pathlib import Path
 from text2three.models.meshy import MeshyModel
 from text2three.models.shapee import ShapeEModel
 from text2three.viewer import viewer
+from text2three.models.modelslab import ModelslabModel
 
 def main():
     parser = argparse.ArgumentParser(description="Test 3D generation with selectable model")
     parser.add_argument("-p", "--prompt", type=str, required=True, help="Text prompt to generate the 3D model")
-    parser.add_argument("-m", "--model", type=str, default="meshy", choices=["meshy", "shapee"], help="Model to use")
+    parser.add_argument("-m", "--model", type=str, default="meshy", choices=["meshy", "shapee", "modelslab"], help="Model to use")
     args = parser.parse_args()
 
     print(f"==> Starting generation with model: {args.model} for prompt: {args.prompt}")
@@ -18,8 +19,10 @@ def main():
 
     if args.model == "shapee":
         model = ShapeEModel()
-    else:
+    elif args.model == "meshy":
         model = MeshyModel()
+    else:
+        model = ModelslabModel()
 
     model.generate(args.prompt, output_path=output_path)
 
