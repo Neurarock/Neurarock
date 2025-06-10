@@ -64,7 +64,7 @@ class ModelslabModel(BaseModel):
         print(f"[INFO] Waiting for URL to be reachable: {model_url}")
         start_time = time.time()
         timeout = 120
-        interval = 5
+        interval = 1
 
         while True:
             try:
