@@ -4,11 +4,12 @@ from text2three.models.meshy import MeshyModel
 from text2three.models.shapee import ShapeEModel
 from text2three.viewer import viewer
 from text2three.models.modelslab import ModelslabModel
+from text2three.models.tripo3d import Tripo3DModel
 
 def main():
     parser = argparse.ArgumentParser(description="Test 3D generation with selectable model")
     parser.add_argument("-p", "--prompt", type=str, required=True, help="Text prompt to generate the 3D model")
-    parser.add_argument("-m", "--model", type=str, default="meshy", choices=["meshy", "shapee", "modelslab"], help="Model to use")
+    parser.add_argument("-m", "--model", type=str, default="meshy", choices=["meshy", "shapee", "modelslab", "tripo"], help="Model to use")
     args = parser.parse_args()
 
     print(f"==> Starting generation with model: {args.model} for prompt: {args.prompt}")
@@ -21,6 +22,8 @@ def main():
         model = ShapeEModel()
     elif args.model == "meshy":
         model = MeshyModel()
+    elif args.model == "tripo":
+        model = Tripo3DModel()
     else:
         model = ModelslabModel()
 
