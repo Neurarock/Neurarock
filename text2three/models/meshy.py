@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 class MeshyModel(BaseModel):
     def __init__(self):
         load_dotenv()
-        self.api_key = os.getenv("MESHY_API_KEY_PROD")
+        self.api_key = os.getenv("MESHY_API_KEY_DEV")
         if not self.api_key:
             raise ValueError("MESHY_API_KEY not found in environment variables.")
         self.base_url = "https://api.meshy.ai/openapi/v2/text-to-3d"
