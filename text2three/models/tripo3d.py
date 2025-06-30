@@ -19,6 +19,7 @@ class Tripo3DModel:
     def create_task(self, prompt: str) -> str:
         data = {
             "type": "text_to_model",
+            "model_version": "Turbo-v1.0-20250506",
             "prompt": prompt
         }
         response = requests.post(f"{self.api_base}/task", headers=self.headers, json=data)
@@ -50,7 +51,15 @@ class Tripo3DModel:
             time.sleep(poll_interval)
 
     def download_model(self, url: str, output_path: str) -> None:
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        # --- THIS IS THE FIX ---
+        # Get the directory part of the path.
+        directory = os.path.dirname(output_path)
+        
+        # Only try to create directories if a directory path actually exists.
+        if directory:
+            os.makedirs(directory, exist_ok=True)
+        # --- END OF FIX ---
+        
         response = requests.get(url)
         response.raise_for_status()
         with open(output_path, "wb") as f:

@@ -41,6 +41,8 @@ class ModelslabModel(BaseModel):
         print(f"[INFO] Submitting prompt to Modelslab: {prompt}")
         response = requests.request("POST", self.url, headers=headers, data=payload)
         data = response.json()
+        print("[DEBUG] Full response:", data)
+        
 
         status = data.get("status")
         print("Status:", status)
